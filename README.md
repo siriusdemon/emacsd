@@ -1,0 +1,2 @@
+# emacsd
+.emacs.d
