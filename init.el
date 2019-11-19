@@ -43,17 +43,6 @@
     ;; Cheatsheet: http://www.emacswiki.org/emacs/PareditCheatsheet
     paredit
 
-    ;; key bindings and code colorization for Clojure
-    ;; https://github.com/clojure-emacs/clojure-mode
-    clojure-mode
-
-    ;; extra syntax highlighting for clojure
-    clojure-mode-extra-font-locking
-
-    ;; integration with a Clojure REPL
-    ;; https://github.com/clojure-emacs/cider
-    cider
-
     ;; allow ido usage in as many contexts as possible. see
     ;; customizations/navigation.el line 23 for a description
     ;; of ido
@@ -76,16 +65,6 @@
     ;; git integration
     magit))
 
-;; On OS X, an Emacs instance started from the graphical user
-;; interface will have a different environment than a shell in a
-;; terminal window, because OS X does not run a shell during the
-;; login. Obviously this will lead to unexpected results when
-;; calling external utilities like make from Emacs.
-;; This library works around this problem by copying important
-;; environment variables from the user's shell.
-;; https://github.com/purcell/exec-path-from-shell
-(if (eq system-type 'darwin)
-    (add-to-list 'my-packages 'exec-path-from-shell))
 
 (dolist (p my-packages)
   (when (not (package-installed-p p))
@@ -134,7 +113,22 @@
 
 ;; For editing lisps
 (load "elisp-editing.el")
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(package-selected-packages
+   (quote
+    (paredit-everywhere magit tagedit rainbow-delimiters projectile smex ido-ubiquitous paredit))))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
+;; mory web search for auto-save
+(require 'auto-save)
+(auto-save-enable)
+(setq auto-save-slient t)
 
-;; Langauage-specific
-(load "setup-clojure.el")
-(load "setup-js.el")
